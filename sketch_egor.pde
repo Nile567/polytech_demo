@@ -52,3 +52,7 @@ void mousePressed() {
 boolean FullScreen() {
   return true;
 }
+
+void keyPressed() {
+ if(key=='s')saveFrame("###.jpeg");
+}
