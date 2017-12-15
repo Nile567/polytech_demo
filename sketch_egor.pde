@@ -6,13 +6,16 @@ AudioPlayer player;
 AudioMetaData meta;
 BeatDetect beat;
 int  r = 300;
-float rad = 100;
+float x ;
+float y ;
+float x2 ;
+float y2;
 void setup()
 {
  fullScreen();
   //size(600, 400);
   minim = new Minim(this);
-  player = minim.loadFile("D:/Downloads/gorillaz-dirty-harry-demon-days_(mp3CC.com).mp3");
+  player = minim.loadFile("D:/Downloads/architects-memento-mori-2016_(mp3CC.com).mp3");
   meta = player.getMetaData();
   beat = new BeatDetect();
   player.loop();
@@ -21,7 +24,6 @@ void setup()
 
 void draw()
 { 
-  float t = map(mouseX, 0, width, 0, 1);
   beat.detect(player.mix);
   fill(#1A1F18, 20);
   noStroke();
@@ -30,13 +32,13 @@ void draw()
   noFill();
   fill(-2, 25);
   stroke(-2, 150);
-  int bsize = player.bufferSize();
-  for (int i = 0; i < bsize - 1; i++)
+  int angel = player.bufferSize();
+  for (int i = 0; i < angel - 1; i++)
   {
-    float x = (r)*cos(i*4*PI/bsize);
-    float y = (r)*sin(i*4*PI/bsize);
-    float x2 = (r + player.left.get(i)*300)*cos(i*4*PI/bsize);
-    float y2 = (r + player.left.get(i)*300)*sin(i*4*PI/bsize);
+     x = (r)*cos(i*4*PI/angel);
+     y = (r)*sin(i*4*PI/angel);
+     x2 = (r + player.left.get(i)*300)*cos(i*4*PI/angel);
+     y2 = (r + player.left.get(i)*300)*sin(i*4*PI/angel);
     line(x, y, x2, y2);
   }
   beginShape();
@@ -45,14 +47,9 @@ void draw()
   endShape();
 }
 
-boolean flag =false;
-void mousePressed() {
-  if (dist(mouseX, mouseY, width/2, height/2)<150) flag =!flag;
-}
 boolean FullScreen() {
   return true;
 }
-
 void keyPressed() {
- if(key=='s')saveFrame("###.jpeg");
+  if(key==' ')exit();
 }
